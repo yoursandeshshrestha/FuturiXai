@@ -20,6 +20,7 @@ export function ChatHeader({
   onToggleSidebar,
 }: ChatHeaderProps) {
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleSignOut = async () => {
     setIsSigningOut(true);
@@ -48,13 +49,17 @@ export function ChatHeader({
             )}
           </button>
 
-          {user.image ? (
+          {user.image && !imageError ? (
             <Image
               width={40}
               height={40}
               src={user.image}
               alt={user.name || user.email}
               className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
+              onError={() => {
+                console.error("Failed to load user image:", user.image);
+                setImageError(true);
+              }}
             />
           ) : (
             <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center text-white font-semibold text-sm md:text-base">

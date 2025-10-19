@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 import { User } from "@/types/chat";
 import { getUserInitial } from "@/utils/chat";
 
@@ -15,6 +16,8 @@ export function UserListItem({
   isTyping,
   onClick,
 }: UserListItemProps) {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <button
       onClick={onClick}
@@ -23,13 +26,17 @@ export function UserListItem({
       }`}
     >
       <div className="relative flex-shrink-0">
-        {user.image ? (
+        {user.image && !imageError ? (
           <Image
             width={48}
             height={48}
             src={user.image}
             alt={user.name || user.email}
             className="w-12 h-12 rounded-full object-cover"
+            onError={() => {
+              console.error("Failed to load user image:", user.image);
+              setImageError(true);
+            }}
           />
         ) : (
           <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-white font-semibold text-lg">

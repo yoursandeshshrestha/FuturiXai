@@ -34,7 +34,24 @@ export default function ChatPage() {
         (message.senderId === selectedUser.id ||
           message.receiverId === selectedUser.id)
       ) {
-        setMessages((prev) => [...prev, message]);
+        setMessages((prev) => {
+          // Check if this message is replacing a temp message
+          const hasTempMessage = prev.some((m) => m.id.startsWith("temp-"));
+
+          if (hasTempMessage && message.senderId === session?.user?.id) {
+            // Replace the last temp message with the real one
+            const withoutTemp = prev.filter((m) => !m.id.startsWith("temp-"));
+            return [...withoutTemp, message];
+          }
+
+          // Check for duplicates by ID
+          const isDuplicate = prev.some((m) => m.id === message.id);
+          if (isDuplicate) {
+            return prev;
+          }
+
+          return [...prev, message];
+        });
       }
 
       // Update last message and unread count in users list

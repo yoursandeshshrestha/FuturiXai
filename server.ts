@@ -99,16 +99,19 @@ app.prepare().then(() => {
                 },
               });
 
+              const messagePayload = JSON.stringify({
+                type: "message",
+                message: savedMessage,
+              });
+
               // Send to receiver if online
               const receiverClient = clients.get(message.receiverId);
               if (receiverClient) {
-                receiverClient.ws.send(
-                  JSON.stringify({
-                    type: "message",
-                    message: savedMessage,
-                  })
-                );
+                receiverClient.ws.send(messagePayload);
               }
+
+              // Also send back to sender to confirm and replace temp message
+              ws.send(messagePayload);
             }
             break;
 

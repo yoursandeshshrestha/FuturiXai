@@ -225,9 +225,7 @@ export default function ChatPage() {
       <div className="flex-1 flex overflow-hidden">
         <Sidebar
           users={users.map((user) =>
-            user.id === selectedUser?.id
-              ? { ...user, unreadCount: 0 }
-              : user
+            user.id === selectedUser?.id ? { ...user, unreadCount: 0 } : user
           )}
           selectedUser={selectedUser}
           typingUsers={

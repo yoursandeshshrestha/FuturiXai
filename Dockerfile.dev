@@ -11,9 +11,10 @@ COPY prisma ./prisma
 RUN npx prisma generate
 
 # Expose port
-EXPOSE 3000
+ARG PORT=3000
+EXPOSE ${PORT}
 
-ENV PORT=3000
+ENV PORT=${PORT}
 ENV HOSTNAME="0.0.0.0"
 
 # Start development server

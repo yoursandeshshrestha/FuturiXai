@@ -326,34 +326,32 @@ function SignInForm() {
             </button>
           </form>
 
-          {/* Demo Accounts - Only in development */}
-          {process.env.NODE_ENV !== "production" && (
-            <div className="mt-6 space-y-3">
-              <p className="text-xs text-gray-400 text-center">
-                Try with demo accounts:
-              </p>
-              <div className="flex gap-3">
-                <button
-                  type="button"
-                  onClick={() => handleDemoAccount("demo1")}
-                  disabled={loading || oauthLoading !== null}
-                  className="flex-1 text-gray-600 py-2 px-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Fill in demo account 1 credentials"
-                >
-                  Demo 1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleDemoAccount("demo2")}
-                  disabled={loading || oauthLoading !== null}
-                  className="flex-1 text-gray-600 py-2 px-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                  aria-label="Fill in demo account 2 credentials"
-                >
-                  Demo 2
-                </button>
-              </div>
+          {/* Demo Accounts */}
+          <div className="mt-6 space-y-3">
+            <p className="text-xs text-gray-400 text-center">
+              Try with demo accounts:
+            </p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => handleDemoAccount("demo1")}
+                disabled={loading || oauthLoading !== null}
+                className="flex-1 text-gray-600 py-2 px-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Fill in demo account 1 credentials"
+              >
+                Demo 1
+              </button>
+              <button
+                type="button"
+                onClick={() => handleDemoAccount("demo2")}
+                disabled={loading || oauthLoading !== null}
+                className="flex-1 text-gray-600 py-2 px-3 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Fill in demo account 2 credentials"
+              >
+                Demo 2
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

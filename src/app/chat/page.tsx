@@ -224,9 +224,19 @@ export default function ChatPage() {
 
       <div className="flex-1 flex overflow-hidden">
         <Sidebar
-          users={users}
+          users={users.map((user) =>
+            user.id === selectedUser?.id
+              ? { ...user, unreadCount: 0 }
+              : user
+          )}
           selectedUser={selectedUser}
-          typingUsers={typingUsers}
+          typingUsers={
+            new Set(
+              Array.from(typingUsers).filter(
+                (userId) => userId !== selectedUser?.id
+              )
+            )
+          }
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
           onSelectUser={setSelectedUser}
